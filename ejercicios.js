@@ -77,42 +77,39 @@ for (let i = 1; i < 100; i++) {
     }
 }
 
-//Obtener la suma de los elementos de un array.
-let numerosarray = [5, 8, 12, 3, 7];
-let suma = 0;
+//Obtener la suma de los elementos de un array. usando reduce
+let array = [1, 2, 3, 4, 5];
+let suma = array.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+console.log(`La suma de los elementos del array es: ${suma}`);
 
-for (let i = 0; i < numerosarray.length; i++) {
-    suma += numerosarray[i];
-}
-
-console.log(`la suma de los elementos es: ${suma}`);
-
-//Sumar solo los elementos pares de un array.
-let arraypares = [4, 7, 10, 3, 6, 9];
-let sumaPares = 0;
-
-for (let i = 0; i < arraypares.length; i++)
-    if (arraypares[i] % 2 === 0) {
-        sumaPares += arraypares[i];
-}
-
+//Sumar solo los elementos pares de un array. usando filter y reduce
+let arrayPares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let sumaPares = arrayPares.filter(num => num % 2 === 0).reduce((acumulador, valorActual) => acumulador + valorActual, 0);
 console.log(`La suma de los números pares es: ${sumaPares}`);
 
-//Ingresar una palabra e identificar la letras distintas y sus repeticiones. Utilizar un objeto literal
-let palabraB = "CASA";
-let letras = {};
-
-for (let i = 0; i < palabraB.length; i++) {
-    let letra = palabraB[i];
-
-    if (letras[letra]) {
-        letras[letra]++;
-    } else {
-        letras[letra] = 1;
-    }
+/* los objetos literales me sirven para asignar atributos a algo que tiene muchas cosas asignadas a el por ejemplo un jugador
+tiene armas balas vidas etc.
+la estructura es
+let jugador = { atributo: valor
+color: "blanco"
+altura: 5
+anchno: 10
 }
-for (let letra in letras) {
-    console.log(`${letra} = ${letras[letra]}`);
-}
+console.log(jugador.color)
+se puede hace un array con objetos literales adentro
+let jugadores = [{}, {}, {}]
+despues se puede acceder al array y a los objetos dentro del array
+*/
+
+/* Crear un objeto literal con las siguiente propiedades: nombre, sexo biológico y edad. Agregar varios elementos a una lista.
+Obtener el promedio de edad, el nombre de la mujer con mayor edad, el nombre del hombre con menor edad, el promedio de edad de las mujeres.
+*/
+let personas = [
+    { nombre: "Juan", sexo: "masculino", edad: 25 },
+    { nombre: "Maria", sexo: "femenino", edad: 30 },
+    { nombre: "Pedro", sexo: "masculino", edad: 20 },
+    { nombre: "Ana", sexo: "femenino", edad: 35 },
+];
+
 
 
