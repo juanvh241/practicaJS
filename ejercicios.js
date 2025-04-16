@@ -101,15 +101,69 @@ let jugadores = [{}, {}, {}]
 despues se puede acceder al array y a los objetos dentro del array
 */
 
+// Ingresar una palabra e identificar la letras distintas y sus repeticiones. Por ejemplo: PALA (P = 1, A = 2, L = 1). Utilizar un objeto literal
+let palabra2 = "CASA";
+let letras = {};
+
+for (let i = 0; i < palabra2.length; i++) {
+    let letra = palabra2[i];
+
+    if (letras[letra]) {
+        letras[letra]++;
+    } else {
+        letras[letra] = 1;
+    }
+}
+
+for (let letra in letras) {
+    console.log(`${letra} = ${letras[letra]}`);
+}
+
+
 /* Crear un objeto literal con las siguiente propiedades: nombre, sexo biológico y edad. Agregar varios elementos a una lista.
 Obtener el promedio de edad, el nombre de la mujer con mayor edad, el nombre del hombre con menor edad, el promedio de edad de las mujeres.
 */
 let personas = [
-    { nombre: "Juan", sexo: "masculino", edad: 25 },
-    { nombre: "Maria", sexo: "femenino", edad: 30 },
-    { nombre: "Pedro", sexo: "masculino", edad: 20 },
-    { nombre: "Ana", sexo: "femenino", edad: 35 },
+    { nombre: "Ana", sexo: "F", edad: 30 },
+    { nombre: "Luis", sexo: "M", edad: 24 },
+    { nombre: "Maria", sexo: "F", edad: 42 },
+    { nombre: "Carlos", sexo: "M", edad: 20 },
+    { nombre: "Lucia", sexo: "F", edad: 35 }
 ];
 
+let sumaEdades = 0;
+let sumaMujeres = 0;
+let cantMujeres = 0;
 
+let mujerMayor = null;
+let hombreMenor = null;
+
+for (let i = 0; i < personas.length; i++) {
+    let persona = personas[i];
+
+    sumaEdades += persona.edad;
+
+    if (persona.sexo === "F") {
+        sumaMujeres += persona.edad;
+        cantMujeres++;
+
+        if (mujerMayor === null || persona.edad > mujerMayor.edad) {
+            mujerMayor = persona;
+        }
+    }
+
+    if (persona.sexo === "M") {
+        if (hombreMenor === null || persona.edad < hombreMenor.edad) {
+            hombreMenor = persona;
+        }
+    }
+}
+
+let promedioGeneral = sumaEdades / personas.length;
+let promedioMujeres = cantMujeres > 0 ? sumaMujeres / cantMujeres : 0;
+
+console.log(`Promedio general de edad: ${promedioGeneral}`);
+console.log(`Mujer con mayor edad: ${mujerMayor.nombre}`);
+console.log(`Hombre con menor edad: ${hombreMenor.nombre}`);
+console.log(`Promedio de edad de mujeres: ${promedioMujeres}`);
 
