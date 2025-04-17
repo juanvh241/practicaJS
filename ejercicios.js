@@ -122,48 +122,92 @@ for (let letra in letras) {
 
 /* Crear un objeto literal con las siguiente propiedades: nombre, sexo biológico y edad. Agregar varios elementos a una lista.
 Obtener el promedio de edad, el nombre de la mujer con mayor edad, el nombre del hombre con menor edad, el promedio de edad de las mujeres.
+Para el ejercicio anterior, generar una funcion para cada uno de los requerimientos.
 */
+
 let personas = [
     { nombre: "Ana", sexo: "F", edad: 30 },
     { nombre: "Luis", sexo: "M", edad: 24 },
-    { nombre: "Maria", sexo: "F", edad: 42 },
+    { nombre: "María", sexo: "F", edad: 42 },
     { nombre: "Carlos", sexo: "M", edad: 20 },
-    { nombre: "Lucia", sexo: "F", edad: 35 }
+    { nombre: "Lucía", sexo: "F", edad: 35 }
 ];
 
-let sumaEdades = 0;
-let sumaMujeres = 0;
-let cantMujeres = 0;
-
-let mujerMayor = null;
-let hombreMenor = null;
-
-for (let i = 0; i < personas.length; i++) {
-    let persona = personas[i];
-
-    sumaEdades += persona.edad;
-
-    if (persona.sexo === "F") {
-        sumaMujeres += persona.edad;
-        cantMujeres++;
-
-        if (mujerMayor === null || persona.edad > mujerMayor.edad) {
-            mujerMayor = persona;
-        }
+// promedio de edad
+function promedioEdad(personas) {
+    let suma = 0;
+    for (let i = 0; i < personas.length; i++) {
+        suma += personas[i].edad;
     }
-
-    if (persona.sexo === "M") {
-        if (hombreMenor === null || persona.edad < hombreMenor.edad) {
-            hombreMenor = persona;
-        }
-    }
+    return suma / personas.length;
 }
 
-let promedioGeneral = sumaEdades / personas.length;
-let promedioMujeres = cantMujeres > 0 ? sumaMujeres / cantMujeres : 0;
+// mujer mayor 
+function mujerMayorEdad(personas) {
+    let mayor = null;
 
-console.log(`Promedio general de edad: ${promedioGeneral}`);
-console.log(`Mujer con mayor edad: ${mujerMayor.nombre}`);
-console.log(`Hombre con menor edad: ${hombreMenor.nombre}`);
-console.log(`Promedio de edad de mujeres: ${promedioMujeres}`);
+    for (let i = 0; i < personas.length; i++) {
+        if (personas[i].sexo === "F") {
+            if (mayor === null || personas[i].edad > mayor.edad) {
+                mayor = personas[i];
+            }
+        }
+    }
+
+    return mayor ? mayor.nombre : "No hay mujeres";
+}
+
+// hombre menor
+function hombreMenorEdad(personas) {
+    let menor = null;
+
+    for (let i = 0; i < personas.length; i++) {
+        if (personas[i].sexo === "M") {
+            if (menor === null || personas[i].edad < menor.edad) {
+                menor = personas[i];
+            }
+        }
+    }
+
+    return menor ? menor.nombre : "No hay hombres";
+}
+
+// promedio de edad de mujeres
+function promedioEdadMujeres(personas) {
+    let suma = 0;
+    let cantidad = 0;
+
+    for (let i = 0; i < personas.length; i++) {
+        if (personas[i].sexo === "F") {
+            suma += personas[i].edad;
+            cantidad++;
+        }
+    }
+
+    return cantidad > 0 ? suma / cantidad : 0;
+}
+
+console.log("Promedio de edad general:", promedioEdad(personas));
+console.log("Mujer con mayor edad:", mujerMayorEdad(personas));
+console.log("Hombre con menor edad:", hombreMenorEdad(personas));
+console.log("Promedio de edad de mujeres:", promedioEdadMujeres(personas));
+
+//Crear una funcion que reciba 3 parametros: minimo, maximo y divisor.
+// Devolver una lista con los divisores del numero ingresado.
+
+function obtenerDivisibles(minimo, maximo, divisor) {
+    let resultado = [];
+
+    for (let i = minimo; i <= maximo; i++) {
+        if (i % divisor === 0) {
+            resultado.push(i);
+        }
+    }
+
+    return resultado;
+}
+
+// uso de la funcion
+let lista = obtenerDivisibles(1, 20, 3);
+console.log(lista);
 
